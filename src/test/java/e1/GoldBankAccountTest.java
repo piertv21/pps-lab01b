@@ -5,16 +5,14 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class GoldBankAccountTest extends AbstractCoreBankAccountTest {
+public class GoldBankAccountTest extends CoreBankAccountTest {
 
     private static final int INITIAL_DEPOSIT = 1000;
     private static final int OVERDRAFT_LIMIT = 500;
 
     @BeforeEach
     void init(){
-        this.account = new GoldBankAccount(
-                new CoreBankAccount()
-        );
+        super.account = super.factory.createGoldBankAccount();
     }
 
     @Test
@@ -31,6 +29,13 @@ public class GoldBankAccountTest extends AbstractCoreBankAccountTest {
         int legalAmount = INITIAL_DEPOSIT + OVERDRAFT_LIMIT;
         this.account.deposit(INITIAL_DEPOSIT);
         assertDoesNotThrow(() -> this.account.withdraw(legalAmount));
+    }
+
+    @Test
+    public void testCannotWithdrawMoreThanOverdraft(){
+        int illegalAmount = INITIAL_DEPOSIT + OVERDRAFT_LIMIT + 1;
+        this.account.deposit(INITIAL_DEPOSIT);
+        assertThrows(IllegalStateException.class, () -> this.account.withdraw(illegalAmount));
     }
 
 }

@@ -6,12 +6,10 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public abstract class AbstractCoreBankAccountTest {
+public abstract class CoreBankAccountTest {
 
+    protected final BankAccountFactory factory = new BankAccountFactory();
     protected BankAccount account;
-
-    @BeforeEach
-    abstract void init();
 
     @Test
     public void testInitiallyEmpty() {

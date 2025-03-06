@@ -6,16 +6,14 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class BronzeBankAccountTest extends AbstractCoreBankAccountTest {
+public class BronzeBankAccountTest extends CoreBankAccountTest {
 
     private static final int INITIAL_DEPOSIT = 1000;
     private static final int CONDITIONAL_ACCOUNT_FEE = 1;
 
     @BeforeEach
     void init(){
-        this.account = new BronzeBankAccount(
-                new CoreBankAccount()
-        );
+        super.account = super.factory.createBronzeBankAccount();
     }
 
     @Test

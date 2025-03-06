@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class SilverBankAccountTest extends AbstractCoreBankAccountTest {
+public class SilverBankAccountTest extends CoreBankAccountTest {
 
     private static final int INITIAL_DEPOSIT = 1000;
     private static final int WITHDRAW_AMOUNT = 200;
@@ -14,9 +14,7 @@ public class SilverBankAccountTest extends AbstractCoreBankAccountTest {
 
     @BeforeEach
     void init(){
-        this.account = new SilverBankAccount(
-                new CoreBankAccount()
-        );
+        super.account = super.factory.createSilverBankAccount();
     }
 
     @Test
