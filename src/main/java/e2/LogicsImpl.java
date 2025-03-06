@@ -14,6 +14,25 @@ public class LogicsImpl implements Logics {
         this.pawn = this.randomEmptyPosition();
         this.knight = this.randomEmptyPosition();	
     }
+
+	private boolean validPosition(int x, int y) {
+		return x >= 0 && y >= 0 && x < this.size && y < this.size;
+	}
+
+	public LogicsImpl(int size, Pair<Integer,Integer> pawnPosition, Pair<Integer,Integer> knightPosition){
+		if(pawnPosition.equals(knightPosition)) {
+			throw new IllegalArgumentException("Pawn and Knight positions cannot equal");
+		}
+		this.size = size;
+		if(!validPosition(pawnPosition.getX(), pawnPosition.getY())) {
+			throw new IllegalArgumentException("Invalid Pawn position");
+		}
+		if(!validPosition(knightPosition.getX(), knightPosition.getY())) {
+			throw new IllegalArgumentException("Invalid Knight position");
+		}
+		this.pawn = pawnPosition;
+		this.knight = knightPosition;
+	}
     
 	private final Pair<Integer,Integer> randomEmptyPosition(){
     	Pair<Integer,Integer> pos = new Pair<>(this.random.nextInt(size),this.random.nextInt(size));
